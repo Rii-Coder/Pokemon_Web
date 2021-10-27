@@ -44,7 +44,7 @@ let entrenador ={
 }
 
 let entrenador2 = {
-    "_id": 4,
+    "_id": 3,
     "nombre": "Pepe",
     "email": "pepe@gmail.com",
     "password": "123456",
@@ -73,12 +73,22 @@ let entrenador2 = {
 
 
 app.get("/obtenerEntrenador:id", (req, res) => {
-  
-    let id = req.params.id;
-    entrenador.id = id;
-    var dummy = JSON.stringify(entrenador)
-    let entre = dummy
-    res.status(201).json(entre);
+  client.connect();
+  async function obtener(client, id) {
+      const idnew = parseInt(+""+req.params.id);
+      const result = client.db("pokemon").collection("entrenador").findOne({ _id: idnew });
+      return result;
+  }
+  async function func(){
+  try {
+      let result = await obtener(client, 3)
+      res.status(201).json(result);
+      console.log(result)
+  } catch (error) {
+      res.send("Problemas para encontrar");
+  }
+ }
+ func()
   });
   
 app.post("/insertarEntrenador", (req, res) => {
@@ -102,15 +112,18 @@ app.post("/insertarEntrenador2", (req, res) => {
 });
   
   app.put("/actualizarEntrenador:id", (req, res) => {
-    let newEntrenador = req.body;
-    function actualizar(client, newEntrenador){
-      console.log(req.body.nombre)
-      client.connect();
-      const result = client.db("pokemon").collection("entrenador").updateOne({_id : {$eq:req.body._id}}, {$set : newEntrenador});
+    client.connect();
+    const idnew = parseInt(+""+req.params.id);
+    async function actualizar(client,id , newEntrenador){     
+      const result = await client.db("pokemon").collection("entrenador").updateOne({_id:id}, { $set:newEntrenador})
       return result;
     }
-    actualizar(client, newEntrenador)
-    res.status(201).json(newEntrenador);
+    async function func(){
+    let result = await actualizar(client, idnew, entrenador2)
+    res.status(201).json(result);
+    }
+    func()
+
   });
   
 app.delete("/eliminarEntrenador:id", (req, res) => {
