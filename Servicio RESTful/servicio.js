@@ -102,11 +102,15 @@ app.post("/insertarEntrenador2", (req, res) => {
 });
   
   app.put("/actualizarEntrenador:id", (req, res) => {
-    let id = req.params.id;
-    entranador.id = id;
-    var dummy = JSON.stringify(entranador)
-    let entre = dummy
-    res.status(201).json(entre);
+    let newEntrenador = req.body;
+    function actualizar(client, newEntrenador){
+      console.log(req.body.nombre)
+      client.connect();
+      const result = client.db("pokemon").collection("entrenador").updateOne({_id : {$eq:req.body._id}}, {$set : newEntrenador});
+      return result;
+    }
+    actualizar(client, newEntrenador)
+    res.status(201).json(newEntrenador);
   });
   
 app.delete("/eliminarEntrenador:id", (req, res) => {
@@ -128,6 +132,7 @@ app.delete("/eliminarEntrenador:id", (req, res) => {
 
   
   app.listen(3000, (err) => {
+    console.log('Servidor conectado')
     if (err) {
       console.error(err);
       process.exit(1);
