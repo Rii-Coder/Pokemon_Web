@@ -145,7 +145,7 @@ app.delete("/eliminarEntrenador:id", (req, res) => {
 
   
   app.listen(3000, (err) => {
-    console.log('Servidor conectado')
+    console.log('PokeServidor')
     if (err) {
       console.error(err);
       process.exit(1);
