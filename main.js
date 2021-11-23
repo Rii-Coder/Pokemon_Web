@@ -5,6 +5,8 @@ const spinner = document.querySelector("#spinner");
 
 function pokedex(){
 
+limpiar("login")
+
 let limit = 8;
 let offset = 1;
 
@@ -102,3 +104,6 @@ fetchPokemons(offset, limit);
 
 }
 
+function limpiar(pagina){
+  document.getElementById(pagina).remove()
+}
