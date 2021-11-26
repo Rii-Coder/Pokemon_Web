@@ -11,16 +11,23 @@
 
 </head>
 <body>
-    <h1 class="title">Pokedex</h1>
+    <h1 class="title">PokeApp</h1>
 
     <div id="login">
-      <img src="/pokeball.png" id="login"><br>
-      <button onclick="pokedex()" class="botones" id="login">
-        Login
+      <img src="/pokeball.png" id="pokeball" ><br>
+      <h2>Nombre</h2>
+      <input type="text" id="nombre"><br>
+      <h2>Contraseña</h2>
+      <input type="password" id="contra"><br>
+      <button onclick="pokedex()" class="botones" >
+        Inicar sesion
+      </button>
+      <button onclick="pokedex()" class="botones" >
+        Registrarse
       </button>
     </div>
 
-    <div class="pokemon-container">
+    <div class="pokemon-container" id="pokedex">
 
     </div>
     <nav class="pagination" aria-label="..." id="navB">

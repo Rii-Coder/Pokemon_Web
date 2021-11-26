@@ -1,7 +1,6 @@
 const pokemonContainer = document.querySelector(".pokemon-container");
 const spinner = document.querySelector("#spinner");
-
-
+let capturados = [];
 
 function pokedex(){
 
@@ -32,9 +31,20 @@ nextButton.addEventListener("click", () => {
   fetchPokemons(offset, limit);
 });
 
+let cerrarButton = document.createElement("button"); 
+cerrarButton.setAttribute("class", "botones");
+cerrarButton.innerHTML = "Cerrar sesion";
+
+cerrarButton.addEventListener("click", () => {
+  limpiar("pokedex");
+  limpiar("navB");
+  inicioSesion();
+});
+
 const nextLi = document.getElementById('navB');
 nextLi.appendChild(previousButton);
 nextLi.appendChild(nextButton);
+nextLi.appendChild(cerrarButton);
 
 
 function fetchPokemon(id) {
@@ -83,10 +93,7 @@ function createPokemon(pokemon) {
   card.appendChild(spriteContainer);
   card.appendChild(number);
   card.appendChild(name);
-
-  const cardBack = document.createElement("div");
-  cardBack.classList.add("pokemon-block-back");
-
+  card.onclick = function(){alert(name.textContent + " capturado")}
 
   cardContainer.appendChild(card);
   pokemonContainer.appendChild(flipCard);
@@ -105,5 +112,50 @@ fetchPokemons(offset, limit);
 }
 
 function limpiar(pagina){
-  document.getElementById(pagina).remove()
+  let docu = document.getElementById(pagina)
+  while(docu.firstChild){
+    docu.removeChild(docu.firstChild)
+  }
+}
+
+function inicioSesion(){
+  let imgPokeball = document.createElement("img"); 
+  imgPokeball.setAttribute("src", "/pokeball.png");
+  imgPokeball.setAttribute("id", "pokeball");
+
+  let hNombre = document.createElement("H2");
+  hNombre.innerHTML ="Nombre";
+
+  let inputN = document.createElement("input");
+  inputN.setAttribute("type", "text");
+  inputN.setAttribute("id", "nombre");
+
+  let hContra = document.createElement("H2");
+  hContra.innerHTML ="Contraseña";
+
+  let inputC = document.createElement("input");
+  inputC.setAttribute("type", "password");
+  inputC.setAttribute("id", "contra");
+
+  let buttonIniciar = document.createElement("button");
+  buttonIniciar.setAttribute("onclick", "pokedex()");
+  buttonIniciar.setAttribute("class", "botones");
+  buttonIniciar.innerHTML = "Iniciar sesion"
+
+  let buttonRegistar = document.createElement("button");
+  buttonRegistar.setAttribute("onclick", "pokedex()");
+  buttonRegistar.setAttribute("class", "botones");
+  buttonRegistar.innerHTML = "Registrase"
+  
+  let br = document.createElement("br")
+
+  const login = document.getElementById('login');
+  login.appendChild(imgPokeball);
+  login.appendChild(hNombre);
+  login.appendChild(inputN);
+  login.appendChild(hContra);
+  login.appendChild(inputC);
+  login.appendChild(br)
+  login.appendChild(buttonIniciar);
+  login.appendChild(buttonRegistar);
 }
