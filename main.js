@@ -139,10 +139,10 @@ function inicioSesion(){
   imgPokeball.setAttribute("id", "pokeball");
 
   let hNombre = document.createElement("H2");
-  hNombre.innerHTML ="Nombre";
+  hNombre.innerHTML ="Email";
 
   let inputN = document.createElement("input");
-  inputN.setAttribute("type", "text");
+  inputN.setAttribute("type", "email");
   inputN.setAttribute("id", "nombre");
 
   let hContra = document.createElement("H2");
@@ -266,4 +266,43 @@ function mostrarCapturados(){
 
   fetchPokemons();
 
+}
+
+function postEntrenador(email, contra){
+  email = document.getElementById("nombre").value;
+  contra = document.getElementById("contra").value;
+
+  const xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = () => {
+    if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
+    }
+  };
+  xmlHttp.open("POST", "http://localhost:3000");
+  xmlHttp.send();
+}
+
+function getEntrenador(email, contra){
+  email = document.getElementById("nombre").value;
+  contra = document.getElementById("contra").value;
+
+  const xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = () => {
+    if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
+    }
+  };
+  xmlHttp.open("GET", "http://localhost:3000");
+  xmlHttp.send();
+}
+
+function putEntrenadol(email, capturadosP){
+  email = document.getElementById("nombre").value;
+  capturadosP = capturados  
+
+  const xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = () => {
+    if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
+    }
+  };
+  xmlHttp.open("PUT", "http://localhost:3000");
+  xmlHttp.send();
 }

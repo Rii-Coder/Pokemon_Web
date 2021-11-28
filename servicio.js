@@ -79,19 +79,11 @@ app.post("/signup", (req, res) => {
   const { email, password } = req.body;
 
   let entrenadorNew = {
-    "_id": 5,
-    "nombre": "Entrenador",
+
     "email": email,
     "password": password,
-    "caja": {
-      "_id": 5,
-      "pokemones": []
-    },
-    "equipo": {
-      "_id": 5,
-      "pokemones": []
-
-    }
+    "pokemones": []
+    
 
   }
 
