@@ -269,48 +269,79 @@ function mostrarCapturados(){
 }
 
 function postEntrenador(){
-  email = document.getElementById("nombre").value;
-  contra = document.getElementById("contra").value;
+  emailF = document.getElementById("nombre").value;
+  contraF = document.getElementById("contra").value;
   let entrenadorNew = {
-    "email": email,
-    "password": contra,
+    "email": emailF,
+    "password": contraF,
     "pokemones": []    
-  }
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = () => {
-    if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
-    }
   };
-  //xmlHttp.setRequestHeader('accept', 'application/json')
-  //xmlHttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-  xmlHttp.open("POST", "http://localhost:3000/insertarEntrenador2",);
-  xmlHttp.send(JSON.stringify(entrenadorNew));
-  pokedex();
-  alert(email)
+
+ async function postFetch() {
+  const object = entrenadorNew
+  const response = await fetch('http://localhost:3000/insertarEntrenador2', {
+    method: 'POST',
+   // headers: {
+     // 'Content-Type': 'application/json;charset=utf-8'
+    //},
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+postFetch() 
+pokedex();
+alert(emailF)
 }
 
 function getEntrenador(){
-  email = document.getElementById("nombre").value;
-  contra = document.getElementById("contra").value;
-
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = () => {
-    if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
-    }
+  emailF = document.getElementById("nombre").value;
+  contraF = document.getElementById("contra").value;
+  let entrenadorNew = {
+    "email": emailF,
+    "password": contraF,
+    "pokemones": []    
   };
-  xmlHttp.open("GET", "http://localhost:3000");
-  xmlHttp.send();
+
+ async function postFetch() {
+  const object = entrenadorNew
+  const response = await fetch('http://localhost:3000/obtenerEntrenador', {
+    method: 'GET',
+   // headers: {
+     // 'Content-Type': 'application/json;charset=utf-8'
+    //},
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+postFetch() 
+pokedex();
+alert(emailF)
 }
 
-function putEntrenadol(email, capturadosP){
-  email = document.getElementById("nombre").value;
-  capturadosP = capturados  
-
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = () => {
-    if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
-    }
+function putEntrenadol(){
+  emailF = document.getElementById("nombre").value;
+  contraF = document.getElementById("contra").value;
+  let entrenadorNew = {
+    "email": emailF,
+    "password": contraF,
+    "pokemones": []    
   };
-  xmlHttp.open("PUT", "http://localhost:3000");
-  xmlHttp.send();
+
+ async function postFetch() {
+  const object = entrenadorNew
+  const response = await fetch('http://localhost:3000/actualizarEntrenador', {
+    method: 'PUT',
+   // headers: {
+     // 'Content-Type': 'application/json;charset=utf-8'
+    //},
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+postFetch() 
+pokedex();
+alert(emailF)
 }
