@@ -6,7 +6,6 @@ const user = process.argv[2];
 const payload = { user };
 const app = express();
 app.use(express.json());
-const bodyParse = require('body-parser');
 app.use(express.json());
 app.use(express.static("./public"));
 const { MongoClient, Logger } = require('mongodb');
@@ -83,8 +82,6 @@ app.post("/signup", (req, res) => {
     "email": email,
     "password": password,
     "pokemones": []
-    
-
   }
 
   try {
@@ -101,7 +98,6 @@ app.post("/signup", (req, res) => {
     const result = client.db("pokemon").collection("entrenador").insertOne(newEntrenador);
     return result;
   }
-
 })
 
 app.post("/signin", (req, res) => {
@@ -191,8 +187,9 @@ app.post("/insertarEntrenador2", (req, res) => {
     const result = client.db("pokemon").collection("entrenador").insertOne(newEntrenador);
     return result;
   }
-  insertar(client, entrenador2)
-  res.status(201).json(entrenador2);
+  req.body
+  insertar(client, req.body)
+  res.status(201).json(req.body);
 });
 
 app.put("/actualizarEntrenador:id", verifyToken, (req, res) => {

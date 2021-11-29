@@ -158,7 +158,7 @@ function inicioSesion(){
   buttonIniciar.innerHTML = "Iniciar sesion"
 
   let buttonRegistar = document.createElement("button");
-  buttonRegistar.setAttribute("onclick", "pokedex()");
+  buttonRegistar.setAttribute("onclick", "postEntrenador()");
   buttonRegistar.setAttribute("class", "botones");
   buttonRegistar.innerHTML = "Registrase"
   
@@ -268,20 +268,28 @@ function mostrarCapturados(){
 
 }
 
-function postEntrenador(email, contra){
+function postEntrenador(){
   email = document.getElementById("nombre").value;
   contra = document.getElementById("contra").value;
-
+  let entrenadorNew = {
+    "email": email,
+    "password": contra,
+    "pokemones": []    
+  }
   const xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = () => {
     if(xmlHttp.readyState === 4 && xmlHttp.status === 201) {
     }
   };
-  xmlHttp.open("POST", "http://localhost:3000");
-  xmlHttp.send();
+  //xmlHttp.setRequestHeader('accept', 'application/json')
+  //xmlHttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+  xmlHttp.open("POST", "http://localhost:3000/insertarEntrenador2",);
+  xmlHttp.send(JSON.stringify(entrenadorNew));
+  pokedex();
+  alert(email)
 }
 
-function getEntrenador(email, contra){
+function getEntrenador(){
   email = document.getElementById("nombre").value;
   contra = document.getElementById("contra").value;
 
